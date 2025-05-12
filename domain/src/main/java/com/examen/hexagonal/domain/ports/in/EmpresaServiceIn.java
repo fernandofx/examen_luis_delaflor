@@ -7,4 +7,5 @@ public interface EmpresaServiceIn {
     EmpresaDTO createOpenFeignIn(String ruc);
     EmpresaDTO createRetrofitIn(String ruc);
     EmpresaDTO createRestTemplateIn(String ruc);
+    //EmpresaDTO findByDniIn(String ruc);
 }

@@ -1,4 +1,4 @@
-package com.examen.hexagonal.domain.exceptions;
+package com.examen.hexagonal.infraestructure.exceptions;
 
 public class EmpresaException extends RuntimeException{
 

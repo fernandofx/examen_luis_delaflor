@@ -6,4 +6,5 @@ public interface EmpresaServiceOut {
     EmpresaDTO createOpenFeignOut(String ruc);
     EmpresaDTO createRetrofitOut(String ruc);
     EmpresaDTO createRestTemplateOut(String ruc);
+    //EmpresaDTO findByDniOut(String ruc);
 }

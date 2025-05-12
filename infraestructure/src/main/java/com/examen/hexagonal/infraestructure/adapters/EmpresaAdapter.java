@@ -1,7 +1,7 @@
 package com.examen.hexagonal.infraestructure.adapters;
 
 import com.examen.hexagonal.domain.aggregates.constants.Constants;
-import com.examen.hexagonal.domain.exceptions.EmpresaException;
+import com.examen.hexagonal.infraestructure.exceptions.EmpresaException;
 import com.examen.hexagonal.infraestructure.repository.EmpresaRepository;
 import com.examen.hexagonal.infraestructure.response.SunatResponse;
 import com.examen.hexagonal.infraestructure.rest.openfeign.OpenFeignClient;
@@ -35,6 +35,7 @@ public class EmpresaAdapter implements EmpresaServiceOut {
     private final RestTemplate restTemplate;
     private final RetrofitService retrofit = RetrofitClient.getRetrofit().create(RetrofitService.class);
 
+
     @Value("${token.api}")
     private String token;
 
@@ -53,7 +54,9 @@ public class EmpresaAdapter implements EmpresaServiceOut {
     //IMPLEMENTA LOS METODOS DEL PUERTO OUT
     @Override
     public EmpresaDTO createOpenFeignOut(String ruc) {
+        
         return mapToEmpresaDTO(empresaRepository.save(getEntityForSave(ruc, "openfeign")));
+
     }
 
     @Override
@@ -65,6 +68,8 @@ public class EmpresaAdapter implements EmpresaServiceOut {
     public EmpresaDTO createRestTemplateOut(String ruc) {
         return mapToEmpresaDTO(empresaRepository.save(getEntityForSave(ruc, "rest_template")));
     }
+
+
 
     //======================================================================================================
     //                                               METODOS DE APOYO
