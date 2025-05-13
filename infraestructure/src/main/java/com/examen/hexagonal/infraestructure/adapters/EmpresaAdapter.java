@@ -3,13 +3,16 @@ package com.examen.hexagonal.infraestructure.adapters;
 import com.examen.hexagonal.domain.aggregates.constants.Constants;
 import com.examen.hexagonal.infraestructure.exceptions.EmpresaException;
 import com.examen.hexagonal.infraestructure.repository.EmpresaRepository;
-import com.examen.hexagonal.infraestructure.response.SunatResponse;
+import com.examen.hexagonal.domain.aggregates.request.UpdateEstadoRequest;
+import com.examen.hexagonal.domain.aggregates.response.SunatResponse;
 import com.examen.hexagonal.infraestructure.rest.openfeign.OpenFeignClient;
 import com.examen.hexagonal.domain.aggregates.dto.EmpresaDTO;
 import com.examen.hexagonal.domain.entity.EmpresaEntity;
 import com.examen.hexagonal.domain.ports.out.EmpresaServiceOut;
 import com.examen.hexagonal.infraestructure.rest.retrofit.RetrofitClient;
 import com.examen.hexagonal.infraestructure.rest.retrofit.RetrofitService;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +46,8 @@ public class EmpresaAdapter implements EmpresaServiceOut {
     public EmpresaAdapter(OpenFeignClient openFeignClient,
                           ModelMapper empresaMapper,
                           EmpresaRepository empresaRepository,
-                          RestTemplate restTemplate) {
+                          RestTemplate restTemplate
+                          ) {
 
         this.openFeignClient = openFeignClient;
         this.restTemplate = restTemplate;
@@ -69,12 +73,45 @@ public class EmpresaAdapter implements EmpresaServiceOut {
         return mapToEmpresaDTO(empresaRepository.save(getEntityForSave(ruc, "rest_template")));
     }
 
+    @Override
+    public EmpresaDTO findByRucOut(String ruc) {
+        EmpresaEntity empresaEntity = empresaRepository.findByNumeroDocumento(ruc);
+        return buildEmpresaDto(empresaEntity);
+    }
+
+    @Override
+    public EmpresaDTO updateEstadoByRucOut(UpdateEstadoRequest updateEstadoRequest) {
+
+        EmpresaEntity empresaEntity = empresaRepository.findByNumeroDocumento(updateEstadoRequest.getNumeroDocumento());
+        System.out.println("UPDATE ->" +  updateEstadoRequest.getNumeroDocumento());
+        System.out.println("UPDATE ENTITY->" +  empresaEntity.getId());
+        empresaEntity.setEstado(updateEstadoRequest.getEstado());
+        return buildEmpresaDto(empresaRepository.save(empresaEntity));
+    }
 
 
     //======================================================================================================
     //                                               METODOS DE APOYO
     //======================================================================================================
-
+    private EmpresaDTO buildEmpresaDto(EmpresaEntity empresaEntity){
+        return EmpresaDTO.builder()
+                .id(empresaEntity.getId())
+                .razonSocial(empresaEntity.getRazonSocial())
+                .tipoDocumento(empresaEntity.getTipoDocumento())
+                .numeroDocumento(empresaEntity.getNumeroDocumento())
+                .estado(empresaEntity.getEstado())
+                .condicion(empresaEntity.getCondicion())
+                .direccion(empresaEntity.getDireccion())
+                .departamento(empresaEntity.getDepartamento())
+                .provincia(empresaEntity.getProvincia())
+                .distrito(empresaEntity.getDistrito())
+                .actividadEconomica(empresaEntity.getActividadEconomica())
+                .numeroTrabajadores(empresaEntity.getNumeroTrabajadores())
+                .status(empresaEntity.getStatus())
+                .userCreate(empresaEntity.getUserCreate())
+                .dateCreate(empresaEntity.getDateCreate())
+                .build();
+    }
     private EmpresaEntity getEntityForSave(String ruc, String client){
 
         SunatResponse sunatResponse = executeSunat(ruc, client);

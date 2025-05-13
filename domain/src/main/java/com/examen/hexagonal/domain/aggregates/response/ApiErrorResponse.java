@@ -1,4 +1,4 @@
-package com.examen.hexagonal.infraestructure.response;
+package com.examen.hexagonal.domain.aggregates.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

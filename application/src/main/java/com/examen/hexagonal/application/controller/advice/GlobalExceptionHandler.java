@@ -1,7 +1,7 @@
 package com.examen.hexagonal.application.controller.advice;
 
 import com.examen.hexagonal.infraestructure.exceptions.EmpresaException;
-import com.examen.hexagonal.infraestructure.response.ApiErrorResponse;
+import com.examen.hexagonal.domain.aggregates.response.ApiErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

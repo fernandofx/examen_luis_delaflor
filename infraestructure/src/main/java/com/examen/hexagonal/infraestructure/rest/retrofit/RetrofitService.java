@@ -1,6 +1,6 @@
 package com.examen.hexagonal.infraestructure.rest.retrofit;
 
-import com.examen.hexagonal.infraestructure.response.SunatResponse;
+import com.examen.hexagonal.domain.aggregates.response.SunatResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

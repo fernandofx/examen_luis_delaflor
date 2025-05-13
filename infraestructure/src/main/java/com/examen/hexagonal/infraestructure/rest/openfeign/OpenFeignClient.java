@@ -1,6 +1,6 @@
 package com.examen.hexagonal.infraestructure.rest.openfeign;
 
-import com.examen.hexagonal.infraestructure.response.SunatResponse;
+import com.examen.hexagonal.domain.aggregates.response.SunatResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
