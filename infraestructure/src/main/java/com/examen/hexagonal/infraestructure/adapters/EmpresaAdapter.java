@@ -11,6 +11,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -83,6 +85,18 @@ public class EmpresaAdapter implements EmpresaServiceOut {
         }else{
             throw new EmpresaException("No se ha encontrado la empresa solicitada");
         }
+    }
+
+    @Override
+    public List<EmpresaDTO> findByAllOut() {
+        List<EmpresaDTO> listDTO;
+        List<EmpresaEntity> listEmpresaEntity = empresaRepository.findAll();
+        if(!listEmpresaEntity.isEmpty()){
+            listDTO = listEmpresaEntity.stream().map(this::buildEmpresaDto).toList();
+            return listDTO;
+        }
+        throw new EmpresaException("No se encontraron registros de empresas en la DB");
+
     }
 
 

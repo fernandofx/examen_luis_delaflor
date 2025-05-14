@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -69,9 +71,19 @@ public class EmpresaServiceImpl implements EmpresaServiceIn {
     @Override
     public EmpresaDTO deleteByRucIn(String ruc) {
         String nameMethod = "deleteEstadoByRucIn";
-        String SERVICE_NAME = "deleteServiceImpl";
+        String SERVICE_NAME = "EmpresaServiceImpl";
         log.info("{} - {} - INICIO", SERVICE_NAME,nameMethod);
         EmpresaDTO empresaDTO = empresaServiceOut.deleteByRucOut(ruc);
+        log.info("{} - {} - FIN", SERVICE_NAME,nameMethod);
+        return empresaDTO;
+    }
+
+    @Override
+    public List<EmpresaDTO> findByAllIn() {
+        String nameMethod = "findAllIn";
+        String SERVICE_NAME = "EmpresaServiceImpl";
+        log.info("{} - {} - INICIO", SERVICE_NAME,nameMethod);
+        List<EmpresaDTO> empresaDTO = empresaServiceOut.findByAllOut();
         log.info("{} - {} - FIN", SERVICE_NAME,nameMethod);
         return empresaDTO;
     }

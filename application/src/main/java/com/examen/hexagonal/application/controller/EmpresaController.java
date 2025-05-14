@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -55,4 +56,13 @@ public class EmpresaController {
         return ResponseEntity.ok(responseBase);
 
     }
+
+    @GetMapping("/findAll")
+    public ResponseEntity<ResponseBase<List<EmpresaDTO>>>  findAll(){
+        ResponseBase<List<EmpresaDTO>> responseBase = new ResponseBase<>("200", "ok", Optional.of(serviceIn.findByAllIn()));
+        return ResponseEntity.ok(responseBase);
+
+    }
+
+
 }
