@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
         }else if(ex instanceof NoHandlerFoundException){
             status = HttpStatus.NOT_FOUND;
             apiErrorResponse.setMessage("No se encontró la empresa solicitada");
-        }else if(ex instanceof BadRequestException){
+        }else if(ex instanceof HttpClientErrorException.BadRequest){
             status = HttpStatus.BAD_REQUEST;
             apiErrorResponse.setMessage("Los datos enviados son invalidos");
         }else if(ex instanceof HttpServerErrorException.InternalServerError){
