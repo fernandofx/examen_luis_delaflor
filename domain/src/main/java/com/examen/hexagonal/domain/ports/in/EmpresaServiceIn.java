@@ -10,4 +10,5 @@ public interface EmpresaServiceIn {
     EmpresaDTO createRestTemplateIn(String ruc);
     EmpresaDTO findByRucIn(String ruc);
     EmpresaDTO updateEstadoByRucIn(UpdateEstadoRequest updateEstadoRequest);
+    EmpresaDTO deleteByRucIn(String ruc);
 }

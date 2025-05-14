@@ -65,4 +65,14 @@ public class EmpresaServiceImpl implements EmpresaServiceIn {
         log.info("{} - {} - FIN", SERVICE_NAME,nameMethod);
         return empresaDTO;
     }
+
+    @Override
+    public EmpresaDTO deleteByRucIn(String ruc) {
+        String nameMethod = "deleteEstadoByRucIn";
+        String SERVICE_NAME = "deleteServiceImpl";
+        log.info("{} - {} - INICIO", SERVICE_NAME,nameMethod);
+        EmpresaDTO empresaDTO = empresaServiceOut.deleteByRucOut(ruc);
+        log.info("{} - {} - FIN", SERVICE_NAME,nameMethod);
+        return empresaDTO;
+    }
 }

@@ -9,4 +9,5 @@ public interface EmpresaServiceOut {
     EmpresaDTO createRestTemplateOut(String ruc);
     EmpresaDTO findByRucOut(String ruc);
     EmpresaDTO updateEstadoByRucOut(UpdateEstadoRequest updateEstadoRequest);
+    EmpresaDTO deleteByRucOut(String ruc);
 }
